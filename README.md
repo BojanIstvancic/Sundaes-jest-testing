@@ -31,3 +31,10 @@
 - setup mock service worker - setupTests.js - this file comes with create-react-app
 - test elements when populated asynchronously
 - mimic server erorr "500"
+
+## Debugging
+
+- p - filter for searching and running particular files
+- test.only - if we wanted to test only that test when running particular file
+- test.skip - if we want to skip the test
+- waitFor - when we want to wait some period of time - like setTimeout
