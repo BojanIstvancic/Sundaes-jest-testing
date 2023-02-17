@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 import SummaryForm from "../SummaryForm";
 import userEvent from "@testing-library/user-event";
 
-/*
-//  command[ALL]ByQueryType
+/* 
+ command[ALL]ByQueryType
 
   COMMANDS
  - get: expect element to be in DOM

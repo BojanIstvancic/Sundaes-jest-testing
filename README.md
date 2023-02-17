@@ -17,3 +17,13 @@
 ## Add the latest version of the user event
 
 - npm install @testing-library/user-event@^14
+
+## Content:
+
+### create simple test using userEvent (sesion/await)
+
+### Simulate response using Mock Service Worker
+
+- create handlers, mocks/handlers.js
+- create server (node), mocks/server.js - we can find this in documentation
+- setup mock service worker - setupTests.js - this file comes with create-react-app
