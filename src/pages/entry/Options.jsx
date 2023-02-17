@@ -1,15 +1,15 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { Row } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import ScoopOption from "./ScoopOption";
-
+import ToppingOption from "./ToppingOption";
 export default function Options({ optionType }) {
   const [items, setItems] = useState([]);
 
   // optionType is 'scoops' or 'toppings'
   useEffect(() => {
     axios
-      .get(`https://localhost:3030/${optionType}`)
+      .get(`http://localhost:3030/${optionType}`)
       .then((response) => setItems(response.data))
       .catch((error) => {
         // TODO: handle error response
@@ -17,7 +17,7 @@ export default function Options({ optionType }) {
   }, [optionType]);
 
   // TODO: second option should be ToppingOption when available
-  const ItemComponent = optionType === "scoops" ? ScoopOption : null;
+  const ItemComponent = optionType === "scoops" ? ScoopOption : ToppingOption;
 
   const optionItems = items.map((item) => (
     <ItemComponent
