@@ -24,6 +24,10 @@
 
 ### Simulate response using Mock Service Worker (intercept real request and return mocked data)
 
+(REST)
+
 - create handlers, mocks/handlers.js
 - create server (node), mocks/server.js - we can find this in documentation
 - setup mock service worker - setupTests.js - this file comes with create-react-app
+- test elements when populated asynchronously
+- mimic server erorr "500"
