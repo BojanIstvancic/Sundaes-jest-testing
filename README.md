@@ -22,7 +22,7 @@
 
 ### create simple test using userEvent (sesion/await)
 
-### Simulate response using Mock Service Worker
+### Simulate response using Mock Service Worker (intercept real request and return mocked data)
 
 - create handlers, mocks/handlers.js
 - create server (node), mocks/server.js - we can find this in documentation
