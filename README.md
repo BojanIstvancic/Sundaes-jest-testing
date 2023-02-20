@@ -38,3 +38,7 @@
 - test.only - if we wanted to test only that test when running particular file
 - test.skip - if we want to skip the test
 - waitFor - when we want to wait some period of time - like setTimeout
+
+## Create tests that are using contextProvider
+
+- render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider }); (provide a wrapper/context/redux..)

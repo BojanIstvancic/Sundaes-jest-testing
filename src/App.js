@@ -1,11 +1,16 @@
-import "./App.css";
-import SummaryForm from "./pages/summary/SummaryForm";
+import { Container } from "react-bootstrap";
+import { OrderDetailsProvider } from "./contexts/OrderDetails";
+import OrderEntry from "./pages/entry/OrderEntry";
 
 function App() {
   return (
-    <div className="App">
-      <SummaryForm />
-    </div>
+    <Container>
+      <OrderDetailsProvider>
+        {/* Summary Page and Entry page need provader */}
+        <OrderEntry />
+        {/* Confirmation Page doesn't */}
+      </OrderDetailsProvider>
+    </Container>
   );
 }
 

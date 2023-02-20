@@ -43,7 +43,6 @@ export function OrderDetailsProvider(props) {
     const totalCount = countsArray.reduce((total, value) => total + value, 0);
 
     // multiplty the total number of items by the proce for this item type
-
     return totalCount * pricePerItem[optionType];
   }
 
@@ -53,7 +52,6 @@ export function OrderDetailsProvider(props) {
   };
 
   const value = { optionCounts, totals, updateItemCount, resetOrder };
-  return (
-    <OrderDetails.Provider value={value}>{...props}</OrderDetails.Provider>
-  );
+
+  return <OrderDetails.Provider value={value} {...props} />;
 }
