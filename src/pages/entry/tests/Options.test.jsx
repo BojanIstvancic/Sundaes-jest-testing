@@ -6,7 +6,7 @@ test("displays image for each scoop option from server", async () => {
 
   // find the elements that populates asynchronously
   const scoopImages = await screen.findAllByRole("img", { name: /scoop$/i });
-  expect(scoopImages).toHaveLength(2);
+  expect(scoopImages).toHaveLength(2); // 2 - cause we are using data from mocks/server.js
 
   // confirm alt text of images
   const altText = scoopImages.map((element) => element.alt);

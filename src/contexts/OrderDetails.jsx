@@ -4,6 +4,7 @@ import { pricePerItem } from "../constants";
 const OrderDetails = createContext();
 
 // create custom hook to check whether we are in a provider
+// consume context data
 export function useOrderDetails() {
   const contextValue = useContext(OrderDetails);
 

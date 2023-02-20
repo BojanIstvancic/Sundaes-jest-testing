@@ -44,7 +44,7 @@ test("update scoop subtotal when scoops change", async () => {
 test("update toppings subtotal when toppings change", async () => {
   const user = userEvent.setup();
 
-  render(<Options optionType="topping" />);
+  render(<Options optionType="toppings" />);
 
   const toppingsTotal = screen.getByText("Toppings total: $", { exact: false });
 
