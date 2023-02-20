@@ -42,3 +42,4 @@
 ## Create tests that are using contextProvider
 
 - render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider }); (provide a wrapper/context/redux..)
+- create custom utility function that contains Wrapper alreadt **testing-library-utils.jsx**

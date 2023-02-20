@@ -1,13 +1,15 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../../test-utils/testing-library-utils";
 import userEvent from "@testing-library/user-event";
-import { OrderDetailsProvider } from "../../../contexts/OrderDetails";
+// import { OrderDetailsProvider } from "../../../contexts/OrderDetails";
 import Options from "../Options";
 
 test("update scoop subtotal when scoops change", async () => {
   const user = userEvent.setup();
-  render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
+  // render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
   // when component depends on context datta, means we need a provider, we can use { wrapper in render in order to provide the Provider}
   // this can be a router, redux provider, this can be any kind of a provider
+  render(<Options optionType="scoops" />);
+  // do the same with custom render
 
   // make total starts out at 0$
   const scoopsSubtotal = screen.getByText("Scoops total: $", { exact: false });
