@@ -2,6 +2,7 @@ import { render, screen } from "../../../test-utils/testing-library-utils";
 import userEvent from "@testing-library/user-event";
 // import { OrderDetailsProvider } from "../../../contexts/OrderDetails";
 import Options from "../Options";
+import OrderEntry from "../OrderEntry";
 
 test("update scoop subtotal when scoops change", async () => {
   const user = userEvent.setup();
@@ -67,4 +68,37 @@ test("update toppings subtotal when toppings change", async () => {
 
   await user.click(hotFudgeCheckbox);
   expect(toppingsTotal).toHaveTextContent("1.50");
+});
+
+test("update grand total depending on selected toppings and scoops", async () => {
+  const user = userEvent.setup();
+
+  render(<OrderEntry />);
+
+  const grandTotal = screen.getByText("Grand total:", { exact: false });
+
+  // test if starts at 0
+  expect(grandTotal).toHaveTextContent("0.00");
+
+  const vanillaInput = await screen.findByRole("spinbutton", {
+    name: "Vanilla",
+  });
+
+  const chocolateInput = await screen.findByRole("spinbutton", {
+    name: "Chocolate",
+  });
+
+  const cherriesCheckbox = await screen.findByRole("checkbox", {
+    name: "Cherries",
+  });
+
+  await user.clear(vanillaInput);
+  await user.clear(chocolateInput);
+
+  await user.type(vanillaInput, "2");
+  await user.type(chocolateInput, "3");
+
+  await user.click(cherriesCheckbox);
+
+  expect(grandTotal).toHaveTextContent("11.5");
 });
