@@ -1,9 +1,35 @@
-export default function OrderConfirmation() {
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+
+export default function OrderConfirmation({ setOrderPhase }) {
+  const [orderNumber, setOrderNumber] = useState(null);
+  useEffect(() => {
+    axios
+      .post("http://localhost:3030/order")
+      .then((response) => setOrderNumber(response.data.orderNumber))
+      .catch((error) => {
+        setOrderNumber(null);
+      });
+  }, []);
+
+  const handleClick = () => {
+    setOrderPhase("inProgress");
+  };
+
   return (
     <div>
-      <h1>Thank you</h1>
-      <h2>Your order number is 12313213213</h2>
-      <p>Some mini test</p>
+      {!orderNumber && <h1>Loading</h1>}
+      {orderNumber && (
+        <div>
+          <h1>Thank you</h1>
+          <h2>Your order number is: {orderNumber}</h2>
+          <p>Some mini test</p>
+          <Button variant="primary" onClick={handleClick}>
+            Create New Order
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
