@@ -25,7 +25,7 @@ export default function OrderConfirmation({ setOrderPhase }) {
     <div>
       {!orderNumber && <h1>Loading</h1>}
       {orderNumber && (
-        <div>
+        <div style={{ textAlign: "center" }}>
           <h1>Thank you</h1>
           <h2>Your order number is: {orderNumber}</h2>
           <p>Some mini test</p>
