@@ -1,9 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
+import { useOrderDetails } from "../../contexts/OrderDetails";
 
 export default function OrderConfirmation({ setOrderPhase }) {
   const [orderNumber, setOrderNumber] = useState(null);
+  const { resetOrder } = useOrderDetails();
+
   useEffect(() => {
     axios
       .post("http://localhost:3030/order")
@@ -14,6 +17,7 @@ export default function OrderConfirmation({ setOrderPhase }) {
   }, []);
 
   const handleClick = () => {
+    resetOrder();
     setOrderPhase("inProgress");
   };
 

@@ -1,22 +1,61 @@
 import { render, screen } from "@testing-library/react";
-import { UserEvent } from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import App from "../App";
 
-test("order phases done in order", () => {
+test("order phases done in order", async () => {
+  const user = userEvent.setup();
   // render app
-  render(<App />);
+  const { unmount } = render(<App />);
+  // add ice cream scoops and toppings - OrderEntry
+  const vanillaInput = await screen.findByRole("spinbutton", {
+    name: "Vanilla",
+  });
 
-  // add ice cream scoops and toppings
+  await user.clear(vanillaInput);
+  await user.type(vanillaInput, "2");
+
+  const cherriesCheckbox = await screen.findByRole("checkbox", {
+    name: "Cherries",
+  });
+
+  await user.click(cherriesCheckbox);
 
   // find and click button order button
+  const orderSundaeButton = screen.getByRole("button", {
+    name: "Order Sundae",
+  });
+  await user.click(orderSundaeButton);
 
-  // check summary information based on order
+  // check summary information based on order - OrderSummary
+  const scoopsTotal = screen.getByText("Scoops: $", { exact: false });
+  expect(scoopsTotal).toHaveTextContent("4.00");
+
+  const toppingsTotal = screen.getByText("Toppings: $", { exact: false });
+  expect(toppingsTotal).toHaveTextContent("1.50");
 
   // accept terms and conditions and click button to confirm order
+  const termsCheckbox = screen.getByRole("checkbox");
+  await user.click(termsCheckbox);
 
   // confirm order number on confirmation page
+  const termsButton = screen.getByRole("button");
+  await user.click(termsButton);
 
-  // click new order button on confirmation page
+  // click new order button on - Order Confirmation
+  const confirmationButton = await screen.findByRole("button", {
+    name: "Create New Order",
+  });
+  await user.click(confirmationButton);
+  // check that scoops and toppings subtotals have been reset - OrderEntry
+  const scoopsTotalOrderSummary = screen.getByText("Scoops total: $", {
+    exact: false,
+  });
+  expect(scoopsTotalOrderSummary).toHaveTextContent("0.00");
 
-  // check that scoops and toppings subtotals have been reset
+  const toppingsTotalOrderSummary = screen.getByText("Toppings total: $", {
+    exact: false,
+  });
+  expect(toppingsTotalOrderSummary).toHaveTextContent("0.00");
+
+  unmount();
 });

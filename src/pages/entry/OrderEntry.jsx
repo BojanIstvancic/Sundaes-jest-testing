@@ -24,7 +24,7 @@ export default function OrderEntry({ setOrderPhase }) {
         onClick={handleClick}
         disabled={isButtonDisabled}
       >
-        Confirm order
+        Order Sundae
       </Button>
     </div>
   );
