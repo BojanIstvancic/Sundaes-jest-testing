@@ -26,4 +26,3 @@ export const handlers = [
     return res(ctx.json({ orderNumber: 35 }));
   }),
 ];
-f;
