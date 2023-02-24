@@ -59,3 +59,38 @@ test("order phases done in order", async () => {
 
   unmount();
 });
+
+test("order confirmation, loading shows while data is loading", async () => {
+  const user = userEvent.setup();
+  render(<App />);
+
+  // Order Page
+  const vanillaInput = await screen.findByRole("spinbutton", {
+    name: "Vanilla",
+  });
+
+  await user.clear(vanillaInput);
+  await user.type(vanillaInput, "2");
+
+  const orderSundaeButton = screen.getByRole("button", {
+    name: "Order Sundae",
+  });
+  await user.click(orderSundaeButton);
+
+  // Summary Page
+  const termsCheckbox = screen.getByRole("checkbox");
+  await user.click(termsCheckbox);
+
+  const termsButton = screen.getByRole("button");
+  await user.click(termsButton);
+
+  // Confirmation Page
+  const loading = screen.getByText(/loading/i);
+  expect(loading).toBeInTheDocument();
+
+  const HeadingText = await screen.findByText("Thank you");
+  expect(HeadingText).toBeInTheDocument();
+
+  const notLoading = screen.queryByText("Loading");
+  expect(notLoading).not.toBeInTheDocument();
+});
