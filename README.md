@@ -38,8 +38,15 @@
 - test.only - if we wanted to test only that test when running particular file
 - test.skip - if we want to skip the test
 - waitFor - when we want to wait some period of time - like setTimeout
+- screen.debug() - print what's how dooms looks like at the current point of the testing
 
 ## Create tests that are using contextProvider
 
 - render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider }); (provide a wrapper/context/redux..)
 - create custom utility function that contains Wrapper alreadt **testing-library-utils.jsx**
+
+## Mocking function
+
+- jest.fn() - if we are using typescript and passing a function as a prop is required. Also if we have some function
+  that returns some data we can mock (mimik) the function and return some value without pulling actuall function.
+  Basically we can simulate a function without pulling them.

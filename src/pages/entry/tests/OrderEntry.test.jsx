@@ -21,7 +21,7 @@ test("handles error for scoops and toppings routes", async () => {
     })
   );
 
-  render(<OrderEntry />);
+  render(<OrderEntry setOrderPhase={jest.fn()} />);
 
   // find - we expect alerts to appear when reaching catch block
   await waitFor(async () => {
