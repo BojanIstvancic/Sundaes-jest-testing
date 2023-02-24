@@ -5,14 +5,18 @@ import { useOrderDetails } from "../../contexts/OrderDetails";
 
 export default function OrderConfirmation({ setOrderPhase }) {
   const [orderNumber, setOrderNumber] = useState(null);
+  const [isLoading, setIsloading] = useState(true);
   const { resetOrder } = useOrderDetails();
 
   useEffect(() => {
     axios
       .post("http://localhost:3030/order")
-      .then((response) => setOrderNumber(response.data.orderNumber))
+      .then((response) => {
+        setOrderNumber(response.data.orderNumber);
+        setIsloading(false);
+      })
       .catch((error) => {
-        setOrderNumber(null);
+        console.log(error);
       });
   }, []);
 
@@ -23,8 +27,8 @@ export default function OrderConfirmation({ setOrderPhase }) {
 
   return (
     <div>
-      {!orderNumber && <h1>Loading</h1>}
-      {orderNumber && (
+      {isLoading && <h1>Loading</h1>}
+      {!isLoading && (
         <div style={{ textAlign: "center" }}>
           <h1>Thank you</h1>
           <h2>Your order number is: {orderNumber}</h2>
