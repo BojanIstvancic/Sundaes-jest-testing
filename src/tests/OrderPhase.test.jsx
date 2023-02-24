@@ -38,8 +38,10 @@ test("order phases done in order", async () => {
   await user.click(termsCheckbox);
 
   // confirm order number on confirmation page
-  const termsButton = screen.getByRole("button");
-  await user.click(termsButton);
+  const confirmOrderButton = screen.getByRole("button", {
+    name: /confirm order/i,
+  });
+  await user.click(confirmOrderButton);
 
   // click new order button on - Order Confirmation
   const confirmationButton = await screen.findByRole("button", {
@@ -81,8 +83,10 @@ test("order confirmation, loading shows while data is loading", async () => {
   const termsCheckbox = screen.getByRole("checkbox");
   await user.click(termsCheckbox);
 
-  const termsButton = screen.getByRole("button");
-  await user.click(termsButton);
+  const confirmOrderButton = screen.getByRole("button", {
+    name: /confirm order/i,
+  });
+  await user.click(confirmOrderButton);
 
   // Confirmation Page
   const loading = screen.getByText(/loading/i);
@@ -93,4 +97,25 @@ test("order confirmation, loading shows while data is loading", async () => {
 
   const notLoading = screen.queryByText("Loading");
   expect(notLoading).not.toBeInTheDocument();
+});
+
+test("toppings list and heading are not visible if no toppings are selected", async () => {
+  const user = userEvent.setup();
+  render(<App />);
+
+  // Order Page
+  const vanillaInput = await screen.findByRole("spinbutton", {
+    name: "Vanilla",
+  });
+
+  await user.clear(vanillaInput);
+  await user.type(vanillaInput, "2");
+
+  const orderSundaeButton = screen.getByRole("button", {
+    name: "Order Sundae",
+  });
+  await user.click(orderSundaeButton);
+
+  const toppingsTotal = screen.queryByText("Toppings: $", { exact: false });
+  expect(toppingsTotal).not.toBeInTheDocument();
 });

@@ -37,7 +37,7 @@ export default function SummaryForm({ setOrderPhase }) {
         />
       </Form.Group>
       <Button variant="primary" type="submit" disabled={!tcChecked}>
-        Accept Terms and Conditions
+        Confirm Order
       </Button>
     </Form>
   );

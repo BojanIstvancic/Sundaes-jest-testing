@@ -20,8 +20,12 @@ export default function OrderSummary({ setOrderPhase }) {
       <h1>Order Summary </h1>
       <h2>Scoops: {formantCurrency(totals.scoops)}</h2>
       <ul>{scoopList}</ul>
-      <ul>{toppingList}</ul>
-      <h2>Toppings: {formantCurrency(totals.toppings)}</h2>
+      {totals.toppings !== 0 && (
+        <>
+          <ul>{toppingList}</ul>
+          <h2>Toppings: {formantCurrency(totals.toppings)}</h2>
+        </>
+      )}
       <SummaryForm setOrderPhase={setOrderPhase} />
     </div>
   );
